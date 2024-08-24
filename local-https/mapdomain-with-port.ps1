@@ -41,9 +41,6 @@ $hostsEntry = @"
 # end of section
 "@
 
-Add-Content -Path $hostsPath -Value $hostsEntry
-Write-Output "Hosts file updated."
-
 # Prompt for the path of the Caddyfile
 $caddyfilePath = Read-Host "Enter the path to the Caddyfile (or press Enter to use default)"
 if (-not $caddyfilePath) {
@@ -95,7 +92,17 @@ www.$domain {
     redir https://$domain{uri} permanent
 }
 "@
+    Write-Output "Added www.$domain to Caddyfile."
+    $hostsEntry += @"
+# $name related
+127.0.0.1 www.$domain
+# end of section
+"@
+        Write-Output "Adding www.$domain to Hosts file..."
 }
+
+Add-Content -Path $hostsPath -Value $hostsEntry
+Write-Output "Hosts file updated."
 
 Add-Content -Path $caddyfilePath -Value $caddyfileEntry
 Write-Output "Caddyfile updated."
