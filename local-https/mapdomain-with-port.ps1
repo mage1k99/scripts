@@ -1,10 +1,9 @@
+Write-Output "This script will try to map a domain with a port in Caddyfile and Hosts file."
+
 Write-Output "This script assumes the following:"
-Write-Output "0. caddy is installed and in path"
-Write-Output "1. mkcert is installed and in path"
-Write-Output "2. You don't have anything mapped to :80 in Caddyfile"
-Write-Output "3. You don't have anything mapped to :443 in Caddyfile"
-Write-Output "4. It drops the certificate file in the current directory"
-Write-Output "5. You have administrator rights"
+Write-Output "1. caddy, mkcert is installed and in path"
+Write-Output "2. You don't have anything mapped to :80, :443 in Caddyfile"
+Write-Output "3. You are running as an administrator in windows"
 
 # Check if the script is run as administrator
 if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
